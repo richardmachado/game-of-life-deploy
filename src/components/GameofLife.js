@@ -56,7 +56,7 @@ function GameofLife() {
   const [faster, setFaster] = useState(false);
 
   // States to confirm which grid size is being used and its size. I still have plans to make this variable. That is why it is not a simple true false boolean
-  const [size, setSize] = useState({rowNumber: 10, colNumber: 10})
+  const [size] = useState({rowNumber: 10, colNumber: 10})
   const [changeGridSize, setChangeGridSize] = useState(false);
   
   // A ref used to confirm and point out to the sim when it is active
@@ -77,7 +77,7 @@ function GameofLife() {
                 simCount += (oldGrid[newI][newM]).alive
               }
           })
-            if(oldGrid[i][m].alive == 0 && simCount == 3){
+            if(oldGrid[i][m].alive === 0 && simCount === 3){
               copy[i][m].alive = 1
             }else if(simCount < 2 || simCount > 3){
               copy[i][m].alive = 0
@@ -99,7 +99,7 @@ function GameofLife() {
                 simCount += (oldGrid[newI][newM]).alive
               }
             })
-            if(oldGrid[i][m].alive == 0 && simCount == 3){
+            if(oldGrid[i][m].alive === 0 && simCount === 3){
               copy[i][m].alive = 1
             }else if(simCount < 2 || simCount > 3){
               copy[i][m].alive = 0
@@ -151,14 +151,7 @@ function GameofLife() {
           {simOn ? 'stop' : 'start'}
       </button>
 
-      {/* <button // the next button is to stop the program from running - simply by updating the state of simOn
-        class="buttons"
-        onClick={() => {
-          setSimOn(false);
-        }}
-      >
-        Stop
-      </button> */}
+
 
       <button // This button updates the speed to the faster setting by chaning the state controling the speed. This is referenced in the runSimulation function 
           class="buttons"
