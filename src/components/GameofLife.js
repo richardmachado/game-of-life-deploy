@@ -6,6 +6,7 @@ import '../App.css'
 // These are the initial variables we are using to set up the cells as well as the grid
 let rowNumber = 25
 let colNumber = 25
+
 let id = 0
 let cell = {alive: 0, id : id}
 
@@ -135,7 +136,7 @@ function GameofLife() {
         <h1>Conway's Game of Life</h1>
       </div>
      
-
+      <div className="all-buttons">
       <button // the first button runs the program itself. Changing the state and making sure the ref is true. it also runs the function run sim to make sure it will keep itterating
           class="buttons"
           style={{backgroundColor: !simOn ? '#1DDAA6': 'red', width:'100px', fontSize: "20px"}}
@@ -155,15 +156,14 @@ function GameofLife() {
 
       <button // This button updates the speed to the faster setting by chaning the state controling the speed. This is referenced in the runSimulation function 
           class="buttons"
+          disabled={simOn}
           style={{backgroundColor: !faster ? 'pink': 'yellow', width:'100px', fontSize: "20px"}}
         onClick={() => {
           setFaster(!faster);
-        }}
-        
-      >
+         }}
+        >
         {faster ? 'lightspeed' : 'slow'}
       </button>
-
 
 
       <button // this button will clear the grid and reset it to 25x25
@@ -172,7 +172,6 @@ function GameofLife() {
         onClick={() => {
           setChangeGridSize(false)
           setSimOn(false);
- 
           setGrid(blankGrid());
           
         }}
@@ -182,38 +181,47 @@ function GameofLife() {
 
       <button // this button changes the grid size to 10x10 and updates the state to ensure it calculates neighbors correctly when the program is running
           class="buttons"
-          style={{width:'100px',height:'30px', fontSize: "12px"}}
+            disabled={simOn}
+            style={{width:'100px', fontSize: "20px"}}
         onClick={() => {
           const rows = []
           for(let i = 0; i < size.rowNumber; i++){
             rows.push(Array.from(Array(size.colNumber), () => cell))}
           setGrid(rows)
           setChangeGridSize(true)
-          setFaster(true)
+      
         }}
       >
-        Shrink to 10x10
-      </button>
+            10x10
+          </button>
+          
+
+
+
+
 
       <button // this button uses the randomGrid function to reset the grid to a randomized 25x25 grid
           class="buttons"
-          style={{width:'100px',height:'30px', fontSize: "12px"}}
+          style={{width:'100px', fontSize: "20px"}}
         onClick={() => {
           setChangeGridSize(false)
  
           setGrid(randomGrid());
         }}
       >
-          Random
+            Random
       </button>
-      <p>Generation: {genCounter}</p>
+        </div>
+        
+        <p>Generation: {genCounter}</p>
+        
       <div // In this div we are displaying the grid. Based on the size being used it will show differnt amounts. What is being shown in the div itself starting on line 145 is the grid and making each cell clickable. We are utilizing immer produce again in order to make a new copy of the grid when a cell is clicked - changing its status from dead to alive
         className="grid"
         style={!changeGridSize ? {
           display: "grid",
-          gridTemplateColumns: `repeat(${colNumber},30px)`, 
+          gridTemplateColumns: `repeat(${colNumber},25px)`, 
         } : {display: "grid",
-        gridTemplateColumns: `repeat(${size.colNumber},30px)`,}}
+        gridTemplateColumns: `repeat(${size.colNumber},25px)`,}}
       >
         {grid.map((rows, k) =>
           rows.map((columns, e) => (
@@ -235,8 +243,8 @@ function GameofLife() {
                 }
               }}
               style={{
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
                 backgroundColor: grid[k][e].alive ? "dodgerblue" : "black",
                 border: "dotted 1px white",
               }}

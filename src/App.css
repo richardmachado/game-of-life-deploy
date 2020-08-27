@@ -22,10 +22,15 @@ body {
   margin-left: 4rem;
 
 }
+
+.all-buttons {
+  border-bottom: 2px
+}
 .buttons {
   margin-left: 7px;
   margin-right: 7px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+
 }
 
 .paragraph {
