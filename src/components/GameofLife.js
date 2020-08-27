@@ -194,7 +194,18 @@ function GameofLife() {
       >
             10x10
           </button>
+          <button // this button will clear the grid and reset it to 25x25
+          class="buttons"
+          style={{width:'100px', fontSize: "20px"}}
+        onClick={() => {
+          setChangeGridSize(false)
+          setSimOn(false);
+          setGrid(blankGrid());
           
+        }}
+      >
+        25x25
+      </button>
 
 
 
