@@ -8,7 +8,20 @@ let rowNumber = 25
 let colNumber = 25
 
 let id = 0
-let cell = {alive: 0, id : id}
+let cell = { alive: 0, id: id }
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+
+
+
 
 // This is used when calculating the neighbors of each cell - the first value is for the X axis on the grid and the second is for the y axis
 const neighbors = [
@@ -189,11 +202,15 @@ function GameofLife() {
             rows.push(Array.from(Array(size.colNumber), () => cell))}
           setGrid(rows)
           setChangeGridSize(true)
+              setFaster(true);
       
         }}
       >
             10x10
           </button>
+
+
+
           <button // this button will clear the grid and reset it to 25x25
           class="buttons"
           style={{width:'100px', fontSize: "20px"}}
@@ -256,7 +273,7 @@ function GameofLife() {
               style={{
                 width: 25,
                 height: 25,
-                backgroundColor: grid[k][e].alive ? "dodgerblue" : "black",
+                backgroundColor: grid[k][e].alive ? getRandomColor() : '#404142',
                 border: "dotted 1px white",
               }}
             ></div>
