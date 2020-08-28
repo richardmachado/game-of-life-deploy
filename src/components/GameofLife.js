@@ -11,13 +11,14 @@ let id = 0
 let cell = { alive: 0, id: id }
 
 function getRandomColor() {
-  var letters = '0123456789ABCDEF';
+  var letters = 'BCDEF'.split('');
   var color = '#';
   for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
+    color += letters[Math.floor(Math.random() * letters.length)];
   }
   return color;
 }
+
 
 
 
@@ -134,11 +135,16 @@ function GameofLife() {
     setGrid((oldGrid) => {
       return runIt(oldGrid);
     });
-    count = count + 1
+    count = count +1
     setGenCounter(count)
+
+ 
 
     setTimeout(runSimulation, faster ? 1 : 1000);
   }, [faster]);
+
+ 
+
 
  
   // Here we are displaying what is on the screen itself
@@ -221,12 +227,8 @@ function GameofLife() {
           
         }}
       >
-        25x25
+            25x25
       </button>
-
-
-
-
 
       <button // this button uses the randomGrid function to reset the grid to a randomized 25x25 grid
           class="buttons"
